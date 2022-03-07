@@ -129,9 +129,8 @@ class CartListActivity : BaseActivity() {
             }
 
 
-            var subTotal: Double = 0.0
+            var subTotal = 0.0
             var shippingCharge = 0
-
             for (item in mCartListItems) {
                 val availableQuantity = item.stock_quantity.toInt()
                 if (availableQuantity > 0) {

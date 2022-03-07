@@ -36,6 +36,16 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             )
         }
 
+        //Navigate the user to the DashboardActivity if logged in and clear backstack
+
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            // User is signed in
+            val i = Intent(this@LoginActivity, DashboardActivity::class.java)
+            i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(i)
+        }
+
         //Click event for the register text, forgot password text, and login button
         binding.tvRegister.setOnClickListener(this)
         binding.tvForgotPassword.setOnClickListener(this)
