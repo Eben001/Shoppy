@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ebenezer.gana.shoppy.R
+import com.ebenezer.gana.shoppy.databinding.ItemDashboardLayoutBinding
 import com.ebenezer.gana.shoppy.models.Products
 import com.ebenezer.gana.shoppy.ui.activities.ProductDetailsActivity
 import com.ebenezer.gana.shoppy.utils.Constants
@@ -16,64 +17,61 @@ import com.ebenezer.gana.shoppy.utils.GlideLoader
 class DashboardListAdapter(
     private val context: Context,
     private var allProducts: ArrayList<Products>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<DashboardListAdapter.ViewHolder>() {
 
-    //private var onClickListener: OnClickListener? = null
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.item_dashboard_layout,
-                parent,
-                false
-            )
-        )
-    }
-
-   /* fun setOnclickListener(onClickListener: OnClickListener){
-        this.onClickListener = onClickListener
-    }*/
+    inner class ViewHolder(val binding: ItemDashboardLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private lateinit var products: Products
 
 
+        fun bind(products: Products) {
+            this.products = products
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val model = allProducts[position]
-        if (holder is MyViewHolder) {
+
             GlideLoader(context).loadProductPicture(
-                model.image,
-                holder.itemView.findViewById(R.id.iv_dashboard_item_image)
+                products.image,
+                binding.ivDashboardItemImage
             )
-            holder.itemView.findViewById<TextView>(R.id.tv_dashboard_item_title).text = model.title
-            holder.itemView.findViewById<TextView>(R.id.tv_dashboard_item_price).text =
-                "₦${model.price}"
-            holder.itemView.findViewById<TextView>(R.id.tv_dashboard_item_description).text =
-                model.description
 
-            holder.itemView.setOnClickListener{
+            binding.tvDashboardItemTitle.text = products.title
+            binding.tvDashboardItemPrice.text =
+                "₦${products.price}"
+            binding.tvDashboardItemDescription.text =
+                products.description
+
+            itemView.setOnClickListener {
                 val intent = Intent(context, ProductDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_PRODUCT_ID, model.product_id)
+                intent.putExtra(Constants.EXTRA_PRODUCT_ID, products.product_id)
 
-                intent.putExtra(Constants.EXTRA_PRODUCT_OWNER_ID, model.user_id) // the id of the user who uploaded the products
+                intent.putExtra(
+                    Constants.EXTRA_PRODUCT_OWNER_ID,
+                    products.user_id
+                ) // the id of the user who uploaded the products
                 context.startActivity(intent)
+
             }
 
-            /* holder.itemView.setOnClickListener{
-                 onClickListener.let {
-                     it!!.onClick(position, model)
-                 }
-             }*/
+
         }
+
     }
 
-    override fun getItemCount(): Int {
-        return allProducts.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemDashboardLayoutBinding.inflate(
+            LayoutInflater.from(context),
+            parent, false
+        )
+        return ViewHolder(binding)
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    /*interface  OnClickListener{
-        fun onClick(position:Int, product:Products)
-    }*/
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(allProducts[position])
+
+    }
+
+    override fun getItemCount() = allProducts.size
+
 }
 
