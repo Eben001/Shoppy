@@ -18,8 +18,6 @@ object Constants {
     const val ADDRESSES: String = "addresses"
 
 
-
-
     const val MYSHOPPAL_PREFERENCES: String = "MyShopPalPrefs"
     const val LOGGED_IN_USERNAME: String = "logged_in_username"
     const val EXTRA_USER_DETAILS: String = "extra_user_details"
@@ -74,7 +72,6 @@ object Constants {
     const val EXTRA_SOLD_PRODUCTS_DETAILS: String = "extra_sold_products_details"
 
     const val EXTRA_SOLD_ORDER_PRODUCTS_DETAILS: String = "extra_sold_order_products_details"
-
 
 
     fun showImageChooser(activity: Activity) {

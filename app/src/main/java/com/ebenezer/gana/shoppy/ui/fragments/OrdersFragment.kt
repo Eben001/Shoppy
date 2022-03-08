@@ -1,19 +1,15 @@
 package com.ebenezer.gana.shoppy.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ebenezer.gana.shoppy.R
-
 import com.ebenezer.gana.shoppy.databinding.FragmentOrdersBinding
 import com.ebenezer.gana.shoppy.firestore.FirestoreClass
 import com.ebenezer.gana.shoppy.models.Order
-import com.ebenezer.gana.shoppy.ui.activities.AddProductActivity
 import com.ebenezer.gana.shoppy.ui.adapters.MyOrdersListAdapter
 import com.ebenezer.gana.shoppy.utils.SwipeToDeleteCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,8 +22,6 @@ class OrdersFragment : BaseFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private var mUserId: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,7 +94,7 @@ class OrdersFragment : BaseFragment() {
             binding.rvMyOrderItems.layoutManager = LinearLayoutManager(activity)
             binding.rvMyOrderItems.setHasFixedSize(true)
             binding.rvMyOrderItems.adapter =
-                MyOrdersListAdapter(requireActivity(), ordersList, this, mUserId)
+                MyOrdersListAdapter(requireActivity(), ordersList, this)
 
 
             val deleteSwipeHandler = object : SwipeToDeleteCallback(requireContext()) {
@@ -132,23 +126,6 @@ class OrdersFragment : BaseFragment() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getMyOrdersList(this@OrdersFragment)
     }
-
-   /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_all_orders_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_delete_all_orders -> {
-                showAlertDialogToDeleteAllOrders(mUserId)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-
-    }*/
 
 
     override fun onResume() {

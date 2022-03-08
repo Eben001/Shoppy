@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ebenezer.gana.shoppy.R
 import com.ebenezer.gana.shoppy.databinding.FragmentSoldProductsBinding
 import com.ebenezer.gana.shoppy.firestore.FirestoreClass
-import com.ebenezer.gana.shoppy.models.Order
 import com.ebenezer.gana.shoppy.models.SoldProduct
 import com.ebenezer.gana.shoppy.ui.adapters.SoldProductListAdapter
 import com.ebenezer.gana.shoppy.utils.SwipeToDeleteCallback
@@ -85,8 +84,11 @@ class SoldProductsFragment : BaseFragment() {
                 layoutManager = LinearLayoutManager(activity)
                 setHasFixedSize(true)
 
-                adapter = SoldProductListAdapter(requireActivity(), soldProductsList, this@SoldProductsFragment)
-
+                adapter = SoldProductListAdapter(
+                    requireActivity(),
+                    soldProductsList,
+                    this@SoldProductsFragment
+                )
 
 
                 val deleteSwipeHandler = object : SwipeToDeleteCallback(requireContext()) {
@@ -95,9 +97,9 @@ class SoldProductsFragment : BaseFragment() {
                         showProgressDialog(resources.getString(R.string.please_wait))
 
                         FirestoreClass().deleteASoldProduct(
-                             this@SoldProductsFragment,
-                             soldProductsList[viewHolder.adapterPosition].id
-                         )
+                            this@SoldProductsFragment,
+                            soldProductsList[viewHolder.adapterPosition].id
+                        )
 
                     }
                 }
@@ -129,7 +131,6 @@ class SoldProductsFragment : BaseFragment() {
         getSoldProductsList()
 
     }
-
 
 
     private fun getSoldProductsList() {

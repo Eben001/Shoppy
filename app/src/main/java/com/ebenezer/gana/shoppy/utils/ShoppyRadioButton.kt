@@ -5,7 +5,8 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatRadioButton
 
-class ShoppyRadioButton(context: Context, attributeSet: AttributeSet):AppCompatRadioButton(context, attributeSet) {
+class ShoppyRadioButton(context: Context, attributeSet: AttributeSet) :
+    AppCompatRadioButton(context, attributeSet) {
 
     init {
         applyFont()

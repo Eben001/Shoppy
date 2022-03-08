@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -96,11 +95,14 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
             Constants.PRODUCT_IMAGE
         )
     }
-    fun productUploadSuccess(){
+
+    fun productUploadSuccess() {
         hideProgressDialog()
-        Toast.makeText(this@AddProductActivity,
-        resources.getString(R.string.product_uploaded_success),
-        Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            this@AddProductActivity,
+            resources.getString(R.string.product_uploaded_success),
+            Toast.LENGTH_SHORT
+        ).show()
 
         finish()
     }
@@ -114,18 +116,20 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
         uploadProductDetails()
     }
 
-    private fun uploadProductDetails(){
-        val username = this.getSharedPreferences(Constants.MYSHOPPAL_PREFERENCES,
-            Context.MODE_PRIVATE).getString(Constants.LOGGED_IN_USERNAME, "")!!
+    private fun uploadProductDetails() {
+        val username = this.getSharedPreferences(
+            Constants.MYSHOPPAL_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).getString(Constants.LOGGED_IN_USERNAME, "")!!
 
         val product = Products(
             FirestoreClass().getCurrentUserId(), // this is the Id of the product owner
             user_name = username,
-            binding.etProductTitle.text.toString().trim{it <= ' '},
-            binding.etProductPrice.text.toString().trim{it <= ' '},
-            binding.etProductDescription.text.toString().trim{it <= ' '},
-            binding.etProductQuantity.text.toString().trim{it <= ' '},
-            mProductImageURL, "", binding.etProductShippingCharge.text.toString().trim{it <= ' '}
+            binding.etProductTitle.text.toString().trim { it <= ' ' },
+            binding.etProductPrice.text.toString().trim { it <= ' ' },
+            binding.etProductDescription.text.toString().trim { it <= ' ' },
+            binding.etProductQuantity.text.toString().trim { it <= ' ' },
+            mProductImageURL, "", binding.etProductShippingCharge.text.toString().trim { it <= ' ' }
         )
 
         FirestoreClass().uploadProductDetails(this@AddProductActivity, productInfo = product)
@@ -172,7 +176,11 @@ class AddProductActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {

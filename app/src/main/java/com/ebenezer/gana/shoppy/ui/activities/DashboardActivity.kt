@@ -1,10 +1,8 @@
 package com.ebenezer.gana.shoppy.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -20,7 +18,7 @@ class DashboardActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
-       // setContentView(R.layout.activity_dashboard)
+        // setContentView(R.layout.activity_dashboard)
         setContentView(binding.root)
 
         supportActionBar!!.setBackgroundDrawable(

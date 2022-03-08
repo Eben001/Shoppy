@@ -1,20 +1,16 @@
 package com.ebenezer.gana.shoppy.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebenezer.gana.shoppy.R
 import com.ebenezer.gana.shoppy.databinding.ActivityMyOrderDetailsBinding
-import com.ebenezer.gana.shoppy.firestore.FirestoreClass
 import com.ebenezer.gana.shoppy.models.Order
 import com.ebenezer.gana.shoppy.ui.adapters.CartListAdapter
 import com.ebenezer.gana.shoppy.utils.Constants
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class MyOrderDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMyOrderDetailsBinding

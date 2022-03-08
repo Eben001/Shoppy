@@ -16,12 +16,12 @@ import com.ebenezer.gana.shoppy.utils.Constants
 class AddressListAdapter(
     private val context: Context,
     private var addressList: ArrayList<Address>,
-    private val selectAddress:Boolean
+    private val selectAddress: Boolean
 ) : RecyclerView.Adapter<AddressListAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(val binding: ListItemAddressBinding) :
-        RecyclerView.ViewHolder(binding.root){
+        RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var address: Address
 
@@ -55,7 +55,7 @@ class AddressListAdapter(
 
     }
 
-    fun notifyEditItem(activity: Activity, position:Int){
+    fun notifyEditItem(activity: Activity, position: Int) {
         val intent = Intent(context, AddEditAddressActivity::class.java)
         intent.putExtra(Constants.EXTRA_ADDRESS_DETAILS, addressList[position])
         activity.startActivityForResult(intent, Constants.ADD_ADDRESS_REQUEST_CODE)
@@ -68,5 +68,6 @@ class AddressListAdapter(
         holder.bind(addressList[position])
 
     }
+
     override fun getItemCount() = addressList.size
 }

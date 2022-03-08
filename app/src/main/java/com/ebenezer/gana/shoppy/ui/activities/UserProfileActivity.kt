@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.ebenezer.gana.shoppy.R
 import com.ebenezer.gana.shoppy.databinding.ActivityUserProfileBinding
 import com.ebenezer.gana.shoppy.firestore.FirestoreClass
@@ -225,7 +224,11 @@ class UserProfileActivity : BaseActivity(), View.OnClickListener {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == Constants.READ_STORAGE_PERMISSION_CODE) {

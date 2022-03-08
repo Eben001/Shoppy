@@ -2,15 +2,11 @@ package com.ebenezer.gana.shoppy.ui.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.ebenezer.gana.shoppy.R
 import com.ebenezer.gana.shoppy.databinding.ActivitySoldProductsDetailsBinding
-import com.ebenezer.gana.shoppy.firestore.FirestoreClass
 import com.ebenezer.gana.shoppy.models.SoldProduct
 import com.ebenezer.gana.shoppy.utils.Constants
-import com.ebenezer.gana.shoppy.utils.Constants.PAYMENT_STATUS
 import com.ebenezer.gana.shoppy.utils.GlideLoader
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,7 +14,7 @@ class SoldProductsDetailsActivity : BaseActivity() {
     private lateinit var binding: ActivitySoldProductsDetailsBinding
 
     //private var mSoldProductOwner: String = ""
-    private var mProductDetails:SoldProduct = SoldProduct()
+    private var mProductDetails: SoldProduct = SoldProduct()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_sold_products_details)
@@ -96,8 +92,6 @@ class SoldProductsDetailsActivity : BaseActivity() {
         binding.toolbarSoldProductDetailsActivity.setNavigationOnClickListener { onBackPressed() }
 
     }
-
-
 
 
 }

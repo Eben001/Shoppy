@@ -1,7 +1,6 @@
 package com.ebenezer.gana.shoppy.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -27,7 +26,7 @@ class CheckoutActivity : BaseActivity() {
     private var mSubTotal: Double = 0.0
     private var mTotalAmount: Double = 0.0
 
-    private lateinit var mOrderDetails:Order
+    private lateinit var mOrderDetails: Order
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,16 +63,18 @@ class CheckoutActivity : BaseActivity() {
 
         getProductList()
 
-        binding.btnPlaceOrder.setOnClickListener{
+        binding.btnPlaceOrder.setOnClickListener {
             placeAnOrder()
         }
 
     }
 
-    fun allDetailsUpdatedSuccess(){
+    fun allDetailsUpdatedSuccess() {
         hideProgressDialog()
-        Toast.makeText(this@CheckoutActivity, "Your order has been placed successfully",
-            Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            this@CheckoutActivity, "Your order has been placed successfully",
+            Toast.LENGTH_LONG
+        ).show()
 
         val intent = Intent(this@CheckoutActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -81,13 +82,13 @@ class CheckoutActivity : BaseActivity() {
         finish()
     }
 
-    fun orderPlacedSuccess(){
+    fun orderPlacedSuccess() {
         FirestoreClass().updateAllDetails(this@CheckoutActivity, mCartItemList, mOrderDetails)
     }
 
     private fun placeAnOrder() {
         showProgressDialog(resources.getString(R.string.please_wait))
-        if (mAddressDetails != null){
+        if (mAddressDetails != null) {
             mOrderDetails = Order(
                 FirestoreClass().getCurrentUserId(),
                 mCartItemList,
@@ -103,7 +104,6 @@ class CheckoutActivity : BaseActivity() {
             // create an orders collection from FireStore
             FirestoreClass().placeOrder(this, order = mOrderDetails)
         }
-
 
 
     }
@@ -167,7 +167,7 @@ class CheckoutActivity : BaseActivity() {
 
     private fun getProductList() {
         showProgressDialog(resources.getString(R.string.please_wait))
-       FirestoreClass().getAllProductsList(this@CheckoutActivity)
+        FirestoreClass().getAllProductsList(this@CheckoutActivity)
     }
 
     private fun setupActionBar() {

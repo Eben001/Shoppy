@@ -1,8 +1,6 @@
 package com.ebenezer.gana.shoppy.ui.activities
 
 import android.content.Intent
-import android.location.Address
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.ebenezer.gana.shoppy.R
@@ -16,8 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 class SettingsActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivitySettingsBinding
-    private lateinit var mUserDetails : User
-
+    private lateinit var mUserDetails: User
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,17 +30,15 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         binding.llAddress.setOnClickListener(this)
 
 
-
     }
 
 
-
     override fun onClick(v: View?) {
-        v?.let{
-            when(v.id){
+        v?.let {
+            when (v.id) {
 
-                R.id.tv_edit ->{
-                    val intent = Intent(this@SettingsActivity, UserProfileActivity::class.java )
+                R.id.tv_edit -> {
+                    val intent = Intent(this@SettingsActivity, UserProfileActivity::class.java)
                     intent.putExtra(Constants.EXTRA_USER_DETAILS, mUserDetails)
                     startActivity(intent)
 
@@ -58,14 +53,13 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     finish()
                 }
 
-                R.id.ll_address ->{
+                R.id.ll_address -> {
                     startActivity(Intent(this@SettingsActivity, AddressListActivity::class.java))
 
                 }
             }
         }
     }
-
 
 
     private fun setupActionBar() {
@@ -79,6 +73,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         binding.toolbarSettingsActivity.setNavigationOnClickListener { onBackPressed() }
 
     }
+
     private fun getUserDetails() {
         showProgressDialog(resources.getString(R.string.please_wait))
         FirestoreClass().getUserDetails(this)

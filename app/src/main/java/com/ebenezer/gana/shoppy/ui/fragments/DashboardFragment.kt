@@ -84,10 +84,11 @@ class DashboardFragment : BaseFragment() {
                 binding!!.tvNoDashboardItemsFound.visibility = View.GONE
 
                 // spanCount is set to 2 after every 5th item
-                val layoutManager = GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
-                layoutManager.spanSizeLookup = object:GridLayoutManager.SpanSizeLookup(){
+                val layoutManager =
+                    GridLayoutManager(activity, 2, GridLayoutManager.VERTICAL, false)
+                layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        return if((position + 1) % 5 == 0) 2 else 1
+                        return if ((position + 1) % 5 == 0) 2 else 1
                     }
                 }
                 binding!!.rvDashboardItems.layoutManager = layoutManager

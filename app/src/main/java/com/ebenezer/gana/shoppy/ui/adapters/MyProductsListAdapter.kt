@@ -3,13 +3,8 @@ package com.ebenezer.gana.shoppy.ui.adapters
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ebenezer.gana.shoppy.R
 import com.ebenezer.gana.shoppy.databinding.ListItemProductBinding
 import com.ebenezer.gana.shoppy.models.Products
 import com.ebenezer.gana.shoppy.ui.activities.ProductDetailsActivity

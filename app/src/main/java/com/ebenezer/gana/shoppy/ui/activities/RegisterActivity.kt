@@ -152,7 +152,7 @@ class RegisterActivity : BaseActivity() {
                     // If the registration is successfully done
                     if (task.isSuccessful) {
 
-                                //Firebase registered user
+                        //Firebase registered user
                         val firebaseUser: FirebaseUser = task.result!!.user!!
 
                         val user = User(
@@ -165,7 +165,8 @@ class RegisterActivity : BaseActivity() {
                         FirestoreClass().registerUser(this@RegisterActivity, user)
 
                         val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                         hideProgressDialog()
 
@@ -182,7 +183,7 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    fun userRegistrationSuccess(){
+    fun userRegistrationSuccess() {
 
         //Hide the progress dialog
         hideProgressDialog()
@@ -192,7 +193,6 @@ class RegisterActivity : BaseActivity() {
         ).show()
 
     }
-
 
 
 }
