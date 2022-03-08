@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ebenezer.gana.shoppy.R
@@ -51,7 +52,16 @@ class DashboardListAdapter(
 
             }
 
+            animateView(itemView)
+        }
 
+        private fun animateView(viewToAnimate: View) {
+            if (viewToAnimate.animation == null) {
+                val animation = AnimationUtils.loadAnimation(
+                    viewToAnimate.context, R.anim.scale_xy
+                )
+                viewToAnimate.animation = animation
+            }
         }
 
     }
