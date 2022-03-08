@@ -5,58 +5,47 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.ebenezer.gana.shoppy.R
-import com.ebenezer.gana.shoppy.models.Order
+import com.ebenezer.gana.shoppy.databinding.ListItemProductBinding
 import com.ebenezer.gana.shoppy.models.SoldProduct
 import com.ebenezer.gana.shoppy.ui.activities.SoldProductsDetailsActivity
 import com.ebenezer.gana.shoppy.ui.fragments.SoldProductsFragment
 import com.ebenezer.gana.shoppy.utils.Constants
-
 import com.ebenezer.gana.shoppy.utils.GlideLoader
 
 class SoldProductListAdapter(
     private val context: Context,
     private val soldProductList: ArrayList<SoldProduct>,
-    private val fragment:SoldProductsFragment
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val fragment: SoldProductsFragment
+) : RecyclerView.Adapter<SoldProductListAdapter.ViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ViewHolder(val binding: ListItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MyViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.list_item_product,
-                parent, false
-            )
-        )
-    }
+        private lateinit var soldProduct: SoldProduct
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val model = soldProductList[position]
-
-        if (holder is MyViewHolder) {
+        fun bind(soldProduct: SoldProduct) {
+            this.soldProduct = soldProduct
             GlideLoader(context).loadProductPicture(
-                model.image,
-                holder.itemView.findViewById(R.id.iv_item_image)
+                soldProduct.image,
+                binding.ivItemImage
             )
 
-            holder.itemView.findViewById<TextView>(R.id.tv_item_name).text = model.title
-            holder.itemView.findViewById<TextView>(R.id.tv_item_price).text =
-                "₦${model.total_amount}"
-            holder.itemView.findViewById<ImageButton>(R.id.ib_delete_product).visibility = View.VISIBLE
+            binding.tvItemName.text = soldProduct.title
+            binding.tvItemPrice.text =
+                "₦${soldProduct.total_amount}"
+            binding.ibDeleteProduct.visibility =
+                View.VISIBLE
 
 
 
-            holder.itemView.findViewById<ImageButton>(R.id.ib_delete_product).setOnClickListener {
-                fragment.deleteASoldProduct(model.id)
+            binding.ibDeleteProduct.setOnClickListener {
+                fragment.deleteASoldProduct(soldProduct.id)
             }
 
-            holder.itemView.setOnClickListener {
+            itemView.setOnClickListener {
                 val intent = Intent(context, SoldProductsDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_SOLD_PRODUCTS_DETAILS, model)
+                intent.putExtra(Constants.EXTRA_SOLD_PRODUCTS_DETAILS, soldProduct)
 
                 context.startActivity(intent)
             }
@@ -64,8 +53,17 @@ class SoldProductListAdapter(
         }
     }
 
-    override fun getItemCount(): Int {
-        return soldProductList.size
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ListItemProductBinding.inflate(
+            LayoutInflater.from(context),
+            parent, false
+        )
+        return ViewHolder(binding)
     }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(soldProductList[position])
+    }
+
+    override fun getItemCount() = soldProductList.size
 }
