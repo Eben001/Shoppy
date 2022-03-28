@@ -888,6 +888,7 @@ class FirestoreClass {
      */
     fun getDashboardItemsList(fragment: DashboardFragment) {
         mFirestore.collection(Constants.PRODUCTS)
+            //.limit(10)
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.toString())
