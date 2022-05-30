@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.paging.PagedList
 import com.ebenezer.gana.shoppy.models.*
 import com.ebenezer.gana.shoppy.ui.activities.*
 import com.ebenezer.gana.shoppy.ui.fragments.DashboardFragment
@@ -13,6 +14,7 @@ import com.ebenezer.gana.shoppy.ui.fragments.OrdersFragment
 import com.ebenezer.gana.shoppy.ui.fragments.ProductsFragment
 import com.ebenezer.gana.shoppy.ui.fragments.SoldProductsFragment
 import com.ebenezer.gana.shoppy.utils.Constants
+import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -25,7 +27,7 @@ import com.google.firebase.storage.StorageReference
 class FirestoreClass {
 
     // Access a Cloud Firestore instance.
-    private val mFirestore = FirebaseFirestore.getInstance()
+    val mFirestore = FirebaseFirestore.getInstance()
 
     /**
      * A function to make an entry of the registered user in the FireStore database.
@@ -258,7 +260,7 @@ class FirestoreClass {
                 order.total_amount,
                 order.address,
 
-            )
+                )
 
             val documentReference =
                 mFirestore.collection(Constants.SOLD_PRODUCTS)
@@ -887,8 +889,8 @@ class FirestoreClass {
      * A function to get the dashboard items list. The list will be an overall items list, not based on the user's id.
      */
     fun getDashboardItemsList(fragment: DashboardFragment) {
+
         mFirestore.collection(Constants.PRODUCTS)
-            //.limit(10)
             .get()
             .addOnSuccessListener { document ->
                 Log.e(fragment.javaClass.simpleName, document.toString())

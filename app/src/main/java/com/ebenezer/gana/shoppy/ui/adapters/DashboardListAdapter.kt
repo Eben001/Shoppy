@@ -54,7 +54,7 @@ class DashboardListAdapter(
 
             }
 
-            animateView(itemView)
+           // animateView(itemView)
         }
 
         private fun animateView(viewToAnimate: View) {

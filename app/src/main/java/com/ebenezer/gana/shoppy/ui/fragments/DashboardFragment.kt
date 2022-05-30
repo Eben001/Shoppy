@@ -3,6 +3,7 @@ package com.ebenezer.gana.shoppy.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.provider.SyncStateContract
 import android.view.*
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +15,10 @@ import com.ebenezer.gana.shoppy.models.Products
 import com.ebenezer.gana.shoppy.ui.activities.CartListActivity
 import com.ebenezer.gana.shoppy.ui.activities.SettingsActivity
 import com.ebenezer.gana.shoppy.ui.adapters.DashboardListAdapter
+import com.ebenezer.gana.shoppy.utils.Constants
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class DashboardFragment : BaseFragment() {
@@ -26,6 +30,7 @@ class DashboardFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     lateinit var rvDashboardItems: RecyclerView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,6 +117,7 @@ class DashboardFragment : BaseFragment() {
 
 
     }
+
 
     private fun getDashboardItemList() {
         //show the progress dialog.
